@@ -1,0 +1,26 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["conventions_ack", "verdict", "criteria", "documentation_ok", "security_ok", "regression_risks", "findings"],
+  "properties": {
+    "conventions_ack": {"type": "string"},
+    "verdict": {"type": "string", "enum": ["pass", "fail"]},
+    "criteria": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["criterion", "met", "evidence"],
+        "properties": {
+          "criterion": {"type": "string"},
+          "met": {"type": "boolean"},
+          "evidence": {"type": "string"}
+        }
+      }
+    },
+    "documentation_ok": {"type": "boolean"},
+    "security_ok": {"type": "boolean"},
+    "regression_risks": {"type": "array", "items": {"type": "string"}},
+    "findings": {"type": "array", "items": {"type": "string"}}
+  }
+}

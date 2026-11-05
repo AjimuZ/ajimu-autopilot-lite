@@ -1,0 +1,22 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "conventions_ack", "status", "blocked_reason", "summary", "commit_subject", "commit_body", "user_visible",
+    "docs_updated", "tests_added", "files_changed", "learnings", "reusable_patterns"
+  ],
+  "properties": {
+    "conventions_ack": {"type": "string"},
+    "status": {"type": "string", "enum": ["done", "blocked"]},
+    "blocked_reason": {"type": ["string", "null"]},
+    "summary": {"type": "string"},
+    "commit_subject": {"type": "string"},
+    "commit_body": {"type": "string"},
+    "user_visible": {"type": "boolean"},
+    "docs_updated": {"type": "array", "items": {"type": "string"}},
+    "tests_added": {"type": "array", "items": {"type": "string"}},
+    "files_changed": {"type": "array", "items": {"type": "string"}},
+    "learnings": {"type": "array", "items": {"type": "string"}},
+    "reusable_patterns": {"type": "array", "items": {"type": "string"}}
+  }
+}

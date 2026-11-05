@@ -1,0 +1,99 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "task_id", "analyzed_task_version", "outcome", "issues", "corrections", "corrected_task", "split_tasks",
+    "functional_change", "blocked_reason", "complexity", "estimated_change_size", "risks",
+    "dependencies_verified", "required_tests", "acceptance_evidence", "task_type", "recommended_model",
+    "recommended_effort", "sonnet_sufficient", "routing_reason"
+  ],
+  "properties": {
+    "task_id": {"type": "string"},
+    "analyzed_task_version": {"type": "string"},
+    "outcome": {"type": "string", "enum": ["ready", "corrected", "blocked", "split", "already_implemented"]},
+    "issues": {"type": "array", "items": {"type": "string"}},
+    "corrections": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["field", "reason", "evidence"],
+        "properties": {
+          "field": {"type": "string"},
+          "reason": {"type": "string"},
+          "evidence": {"type": "string"}
+        }
+      }
+    },
+    "corrected_task": {
+      "type": ["object", "null"],
+      "additionalProperties": false,
+      "properties": {
+        "title": {"type": "string"},
+        "description": {"type": "string"},
+        "acceptanceCriteria": {"type": "array", "items": {"type": "string"}},
+        "dependsOn": {"type": "array", "items": {"type": "string"}},
+        "priority": {"type": "integer"},
+        "replaced_criteria": {"type": "array", "items": {"type": "string"}}
+      }
+    },
+    "split_tasks": {
+      "type": ["array", "null"],
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["title", "description", "acceptanceCriteria"],
+        "properties": {
+          "title": {"type": "string"},
+          "description": {"type": "string"},
+          "acceptanceCriteria": {"type": "array", "items": {"type": "string"}},
+          "dependsOn": {"type": "array", "items": {"type": "string"}},
+          "sequential": {"type": "boolean"}
+        }
+      }
+    },
+    "functional_change": {"type": "boolean"},
+    "blocked_reason": {"type": ["string", "null"]},
+    "complexity": {"type": "string", "enum": ["low", "medium", "high", "very_high"]},
+    "estimated_change_size": {"type": "string", "enum": ["small", "medium", "large", "too_large_for_one_session"]},
+    "risks": {"type": "array", "items": {"type": "string"}},
+    "dependencies_verified": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "satisfied", "evidence"],
+        "properties": {
+          "id": {"type": "string"},
+          "satisfied": {"type": "boolean"},
+          "evidence": {"type": "string"}
+        }
+      }
+    },
+    "required_tests": {"type": "array", "items": {"type": "string"}},
+    "acceptance_evidence": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["criterion", "met", "evidence"],
+        "properties": {
+          "criterion": {"type": "string"},
+          "met": {"type": "boolean"},
+          "evidence": {"type": "string"}
+        }
+      }
+    },
+    "task_type": {
+      "type": "string",
+      "enum": [
+        "docs_simple", "ui_simple", "feature_standard", "feature_multi_component", "bug_complex",
+        "integration_sensitive", "refactor_architectural", "problem_very_complex", "critical_hard_to_verify"
+      ]
+    },
+    "recommended_model": {"type": "string", "enum": ["sonnet", "opus"]},
+    "recommended_effort": {"type": "string", "enum": ["low", "medium", "high", "xhigh", "max"]},
+    "sonnet_sufficient": {"type": "boolean"},
+    "routing_reason": {"type": "string"}
+  }
+}
